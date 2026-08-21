@@ -1,0 +1,62 @@
+{
+  "dataset_rows": 360,
+  "training_rows": 270,
+  "test_rows": 90,
+  "accuracy": 1.0,
+  "labels": [
+    "Low",
+    "Moderate",
+    "High"
+  ],
+  "confusion_matrix": [
+    [
+      30,
+      0,
+      0
+    ],
+    [
+      0,
+      30,
+      0
+    ],
+    [
+      0,
+      0,
+      30
+    ]
+  ],
+  "classification_report": {
+    "Low": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 30.0
+    },
+    "Moderate": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 30.0
+    },
+    "High": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 30.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 90.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 90.0
+    }
+  },
+  "note": "Synthetic student-project data; results are not clinical validation."
+}
