@@ -9,7 +9,11 @@ Windows / PowerShell
    py -m pip install -r requirements.txt
 5. Optional: retrain the model:
    py train_model.py
-6. Start the service:
+6. Run checks:
+   py test_model.py
+   py test_validation.py
+   py test_service.py
+7. Start the service:
    py app.py
 
 Service: http://localhost:5002

@@ -1,4 +1,4 @@
-"""Small smoke test for the saved classifier without starting Flask."""
+"""Regression checks for the saved urgency classifier."""
 
 from pathlib import Path
 import joblib
@@ -10,13 +10,15 @@ TEST_CASES = [
     ("mild headache and runny nose", "Low"),
     ("high fever for 2 days", "Moderate"),
     ("chest pain and struggling to breathe", "High"),
+    ("mild sinus pressure and no fever", "Low"),
+    ("painful urination with fever", "Moderate"),
 ]
 
 failed = 0
 for text, expected in TEST_CASES:
     predicted = str(model.predict([text])[0])
-    ok = predicted == expected
-    print(f"{'PASS' if ok else 'FAIL'} | expected={expected:<8} predicted={predicted:<8} | {text}")
-    failed += 0 if ok else 1
+    passed = predicted == expected
+    print(f"{'PASS' if passed else 'FAIL'} | expected={expected:<8} predicted={predicted:<8} | {text}")
+    failed += 0 if passed else 1
 
 raise SystemExit(1 if failed else 0)

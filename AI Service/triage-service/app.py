@@ -1,33 +1,22 @@
-"""MediQueue SA - Symptom Triage Classification Service.
-
-Student-project prototype only. The model is trained on synthetic data and is
-not clinically validated. It must not be used as a real medical diagnosis or
-emergency decision system.
-
-Run:
-    py app.py
-
-Listens on:
-    http://localhost:5002
-
-Endpoint:
-    POST /predict_urgency
-    {"symptoms": "high fever for 2 days"}
-
-Response:
-    {"urgency": "Moderate", "confidence": 0.91}
-"""
+"""MediQueue SA symptom urgency classification service."""
 
 from pathlib import Path
+import logging
 import joblib
 from flask import Flask, jsonify, request
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "triage_model.joblib"
+MIN_CONFIDENCE = 0.45
+VALID_URGENCIES = {"Low", "Moderate", "High"}
+
+from safety_rules import critical_red_flag
+from validation import validate_symptoms
 
 app = Flask(__name__)
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024
 model = joblib.load(MODEL_PATH)
-VALID_URGENCIES = {"Low", "Moderate", "High"}
+logger = logging.getLogger("triage_service")
 
 
 @app.get("/health")
@@ -36,7 +25,7 @@ def health():
         "status": "ok",
         "service": "MediQueue SA Triage Classifier",
         "model": "TF-IDF + Logistic Regression",
-        "training_data": "synthetic",
+        "version": "1.2",
     })
 
 
@@ -44,26 +33,45 @@ def health():
 def predict_urgency():
     data = request.get_json(silent=True)
     if not isinstance(data, dict):
-        return jsonify({"error": "Request body must be JSON"}), 400
+        return jsonify({"error": "Request body must be JSON", "code": "invalid_json"}), 400
 
     symptoms = str(data.get("symptoms", "")).strip()
-    if not symptoms:
-        return jsonify({"error": "symptoms is required"}), 422
+    valid, message = validate_symptoms(symptoms)
+    if not valid:
+        return jsonify({
+            "error": message,
+            "code": "invalid_symptom_description",
+        }), 422
 
     try:
-        urgency = str(model.predict([symptoms])[0])
+        predicted = str(model.predict([symptoms])[0])
         probabilities = model.predict_proba([symptoms])[0]
         confidence = float(max(probabilities))
-    except Exception as exc:
-        return jsonify({"error": f"Prediction failed: {exc}"}), 500
+    except Exception:
+        logger.exception("Urgency prediction failed")
+        return jsonify({"error": "Prediction service error", "code": "prediction_error"}), 500
 
-    if urgency not in VALID_URGENCIES:
-        return jsonify({"error": "Model returned an invalid urgency label"}), 500
+    if predicted not in VALID_URGENCIES:
+        return jsonify({"error": "Invalid urgency result", "code": "invalid_model_output"}), 500
+
+    safety_override = critical_red_flag(symptoms)
+    needs_review = False
+
+    if safety_override:
+        urgency = "High"
+        needs_review = True
+    elif confidence < MIN_CONFIDENCE:
+        urgency = "Moderate"
+        needs_review = True
+    else:
+        urgency = predicted
 
     return jsonify({
         "urgency": urgency,
         "confidence": round(confidence, 4),
-        "disclaimer": "Student prototype using synthetic data; not a medical diagnosis.",
+        "needs_review": needs_review,
+        "safety_override": safety_override,
+        "disclaimer": "For triage support only; this result is not a medical diagnosis.",
     })
 
 
