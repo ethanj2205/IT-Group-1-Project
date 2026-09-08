@@ -1,0 +1,20 @@
+Windows / PowerShell
+
+1. Open PowerShell in the triage-service folder.
+2. Create a virtual environment:
+   py -m venv .venv
+3. Activate it:
+   .\.venv\Scripts\Activate.ps1
+4. Install packages:
+   py -m pip install -r requirements.txt
+5. Optional: retrain the model:
+   py train_model.py
+6. Run checks:
+   py test_model.py
+   py test_validation.py
+   py test_service.py
+7. Start the service:
+   py app.py
+
+Service: http://localhost:5002
+Health:  http://localhost:5002/health
