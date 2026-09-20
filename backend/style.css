@@ -1,0 +1,178 @@
+
+:root{
+  --navy:#142b3d;
+  --ink:#17212b;
+  --muted:#6b7785;
+  --blue:#174f73;
+  --blue-soft:#eaf3f8;
+  --green:#087f5b;
+  --green-soft:#e6f6ef;
+  --red:#c93232;
+  --red-soft:#fff0f0;
+  --amber:#d59b28;
+  --amber-soft:#fff6df;
+  --line:#e3e8ed;
+  --bg:#f5f7f9;
+  --card:#fff;
+  --shadow:0 10px 28px rgba(25,43,58,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--bg); color:var(--ink); min-height:100vh;
+}
+a{color:var(--blue);font-weight:700;text-decoration:none}
+button,input,select,textarea{font:inherit}
+button{border:0;cursor:pointer}
+.app-header{
+  position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(10px);
+}
+.header-inner{
+  max-width:1120px;margin:auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px
+}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-mark{
+  width:40px;height:40px;border-radius:12px;background:var(--navy);color:#fff;display:grid;place-items:center;
+  font-weight:900;font-size:20px;box-shadow:0 6px 14px rgba(20,43,61,.16)
+}
+.brand h1{font-size:20px;margin:0;line-height:1.05;color:var(--navy)}
+.brand p{font-size:11px;color:var(--muted);margin:3px 0 0}
+.header-actions{display:flex;align-items:center;gap:10px}
+.live-pill{background:var(--green-soft);color:var(--green);border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800}
+.logout{color:var(--muted);font-size:13px}
+
+main{
+  width:min(1120px,calc(100% - 32px));margin:28px auto 44px;
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);gap:18px
+}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)
+}
+.full{grid-column:1/-1}
+.card h2{margin:0;color:var(--navy);font-size:21px;letter-spacing:-.02em}
+.card h3{margin:0;color:var(--navy)}
+.card p{color:var(--muted);line-height:1.5}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--green);margin-bottom:5px}
+.dashboard-title{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px}
+.avatar{
+  width:42px;height:42px;border-radius:50%;background:var(--blue-soft);display:grid;place-items:center;color:var(--blue);font-weight:900
+}
+.queue-hero{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  background:linear-gradient(135deg,#f8fbfd,#eef5f8);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:18px
+}
+.queue-position .label{font-size:12px;color:var(--muted);font-weight:800}
+.queue-position .number{font-size:38px;line-height:1;font-weight:900;color:var(--navy);margin:5px 0}
+.wait-badge{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 13px;text-align:center;min-width:112px}
+.wait-badge strong{display:block;font-size:18px;color:var(--navy)}
+.wait-badge span{font-size:11px;color:var(--muted)}
+.section-label{font-size:14px;font-weight:900;color:var(--navy);margin:18px 0 9px}
+.triage-box,.location-box,.status-box,.result{
+  border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff
+}
+.triage-box{background:#fbfcfd}
+.triage-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.urgency{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:900}
+.urgency.high{background:var(--red-soft);color:var(--red)}
+.urgency.moderate{background:var(--amber-soft);color:#956900}
+.urgency.low{background:var(--green-soft);color:var(--green)}
+.quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.quick-actions button,.featureButtons button{background:#fff;color:var(--navy);border:1px solid var(--line);border-radius:13px;padding:13px 10px;font-weight:800;box-shadow:0 3px 10px rgba(20,43,61,.04)}
+.quick-actions button:hover,.featureButtons button:hover{border-color:#c6d4de;transform:translateY(-1px)}
+.featureButtons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+button.primary,button:not(.secondary):not(.danger):not(.ghost){
+  background:var(--blue);color:#fff;border-radius:10px;padding:11px 16px;font-weight:800
+}
+button.primary:hover,button:not(.secondary):not(.danger):not(.ghost):hover{filter:brightness(.93)}
+button.secondary{background:var(--green);color:#fff;border-radius:10px;padding:11px 16px;font-weight:800}
+button.danger{background:var(--red);color:#fff;border-radius:10px;padding:11px 16px;font-weight:800}
+button.ghost{background:#f4f7f9;color:var(--navy);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-weight:800}
+button:disabled{opacity:.5;cursor:not-allowed}
+label{display:block;margin:12px 0 6px;font-size:12px;font-weight:900;color:var(--navy)}
+input,select,textarea{
+  width:100%;border:1px solid #d5dde4;background:#fff;border-radius:10px;padding:11px 12px;color:var(--ink);outline:none
+}
+input:focus,select:focus,textarea:focus{border-color:#86a8bd;box-shadow:0 0 0 3px rgba(23,79,115,.08)}
+textarea{min-height:90px;resize:vertical}
+.formHint{display:block;color:var(--muted);font-size:11px;line-height:1.5;margin-top:6px}
+.patient-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.meta-item{padding:11px;border:1px solid var(--line);border-radius:11px;background:#fbfcfd}
+.meta-item strong{display:block;font-size:11px;color:var(--muted);margin-bottom:3px}
+.meta-item span{font-size:13px;font-weight:800}
+.queueHeader{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:12px}
+.queueHeader p{margin:4px 0 0;font-size:12px}
+.queueItem{
+  display:grid;grid-template-columns:90px minmax(180px,1fr) 100px 110px 140px;gap:12px;align-items:center;
+  padding:13px 14px;margin:8px 0;border:1px solid var(--line);border-radius:13px;background:#fbfcfd
+}
+.queueNumber{font-size:18px;font-weight:900;color:var(--navy)}
+.patientInfo{display:flex;flex-direction:column;gap:3px}.patientInfo span{font-size:11px;color:var(--muted)}
+.status{font-size:11px;font-weight:900;color:var(--navy)}
+.recordCard{display:flex;flex-direction:column;gap:6px;padding:13px;margin-top:10px;border:1px solid var(--line);border-radius:12px;background:#fbfcfd}
+.recordCard span{font-size:12px;color:var(--muted)}
+.featurePanel{margin-top:14px}
+.success{margin-top:12px;padding:12px;background:var(--green-soft);border:1px solid #c9e8d9;color:#176747;border-radius:11px}
+.error{margin-top:12px;padding:12px;background:var(--red-soft);border:1px solid #f0caca;color:#a00000;border-radius:11px}
+.empty{padding:22px;text-align:center;color:var(--muted);font-size:13px}
+.statsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:15px}
+.statCard{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fbfcfd;text-align:center}
+.statCard strong{display:block;font-size:25px;color:var(--navy)}.statCard span{font-size:10px;color:var(--muted)}
+.doctorActionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.consultation-card{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:14px;background:#fbfcfd}
+.calendarEvent,.alarmRow{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px;margin:7px 0;border:1px solid var(--line);border-radius:10px;background:#fbfcfd}
+.muted{color:var(--muted);font-size:12px}
+.auth-card{max-width:520px;margin:55px auto}.auth-card form{display:grid;gap:8px}.auth-links{text-align:center;margin-top:16px}
+.landing{display:block;max-width:1040px}.landing .card{box-shadow:var(--shadow)}
+.hero-card{text-align:center;padding:50px 28px}.hero-card h2{font-size:42px;margin:0 0 12px}.hero-card strong{color:var(--green)}
+.role-container{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.role-card{padding:28px}
+.role-icon{font-size:35px;margin-bottom:12px}.role-card h3{font-size:23px}.role-card p{min-height:48px}
+.role-button{width:100%;padding:13px;border-radius:10px;background:var(--blue);color:#fff;font-weight:900}.role-card:nth-child(2) .role-button{background:var(--green)}
+.system-info{text-align:center;margin-top:16px}
+
+@media(max-width:900px){
+  main{grid-template-columns:1fr}.full{grid-column:auto}
+  .queueItem{grid-template-columns:75px 1fr 95px}.queueItem>*:nth-child(4),.queueItem>*:nth-child(5){display:none}
+}
+@media(max-width:650px){
+  main{width:min(100% - 20px,560px);margin-top:15px}.header-inner{padding:12px 14px}
+  .brand h1{font-size:17px}.live-pill{display:none}
+  .card{padding:15px;border-radius:15px}.quick-actions,.featureButtons,.role-container{grid-template-columns:1fr}
+  .patient-meta,.statsGrid{grid-template-columns:1fr 1fr}.doctorActionGrid{grid-template-columns:1fr}
+  .queue-hero{align-items:flex-start}.hero-card{padding:35px 18px}.hero-card h2{font-size:31px}
+}
+
+/* Reference-style dashboard refinements */
+.next-patient-card{display:flex;flex-direction:column;gap:6px;margin:0 0 14px;padding:15px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(135deg,#fbfdfe,#f2f7f9)}
+.next-patient-card span{font-size:11px;color:var(--muted)}
+.next-patient-head{display:flex;justify-content:space-between;align-items:center;color:var(--navy);font-size:11px}
+.next-patient-head b{font-size:16px}
+.next-patient-card button{align-self:flex-start;margin-top:5px}
+.queueReferral{border-color:#efc6c6;background:#fff8f8}
+.status-note{font-size:10px!important;color:var(--red)!important}
+.admin-main{display:block}
+.admin-main .card{margin-bottom:0}
+@media(max-width:650px){.next-patient-card{padding:13px}.queueItem{grid-template-columns:1fr}.queueItem>*:nth-child(3),.queueItem>*:nth-child(4),.queueItem>*:nth-child(5){display:block}}
+
+/* Easier doctor patient intake workflow */
+.doctorActionGridEasy{grid-template-columns:2fr 1fr}
+.take-next-btn{min-height:54px;font-size:16px;box-shadow:0 7px 18px rgba(23,79,115,.16)}
+.doctorHelp{margin-top:8px;font-size:11px;color:var(--muted);line-height:1.5}
+.take-card-btn{width:100%;min-height:44px;font-size:14px}
+.active-consultation-card{margin-top:12px;padding:16px;border:2px solid #bfe6d3;border-radius:15px;background:linear-gradient(135deg,#f5fffa,#edf9f3)}
+.active-consultation-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.active-label{font-size:10px;font-weight:900;color:var(--green);letter-spacing:.08em}
+.active-consultation-card h3{margin:4px 0 0;color:var(--navy);font-size:22px}
+.consultation-status{font-size:10px;font-weight:900;color:#176747;background:#dff5e9;padding:7px 9px;border-radius:999px;white-space:nowrap}
+.active-patient-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}
+.active-patient-meta div{background:#fff;border:1px solid #d9eee3;border-radius:10px;padding:10px}
+.active-patient-meta small{display:block;color:var(--muted);font-size:10px;margin-bottom:3px}
+.active-patient-meta strong{font-size:13px;color:var(--navy)}
+.consultationButtons{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:8px;margin-top:10px}
+.consultationButtons button{min-height:44px}
+@media(max-width:650px){
+  .doctorActionGridEasy{grid-template-columns:1fr}
+  .active-patient-meta{grid-template-columns:1fr 1fr}
+  .consultationButtons{grid-template-columns:1fr}
+}
